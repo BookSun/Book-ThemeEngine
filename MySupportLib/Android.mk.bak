@@ -1,0 +1,22 @@
+LOCAL_PATH := $(call my-dir)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE_TAGS := optional
+LOCAL_SRC_FILES := $(call all-java-files-under, src)
+LOCAL_RESOURCE_DIR := $(LOCAL_PATH)/res
+LOCAL_JNI_SHARED_LIBRARIES := libbook_imageutils
+LOCAL_JNI_SHARED_LIBRARIES += libbook_shell
+LOCAL_MANIFEST_PACKAGE_NAME := com.book.support
+LOCAL_PACKAGE_NAME := bookSupport
+LOCAL_CERTIFICATE  := platform
+include $(BUILD_PACKAGE)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE_TAGS := optional
+LOCAL_SRC_FILES := $(call all-java-files-under, src)
+LOCAL_INTERMEDIATE_SOURCES += APPS/bookSupport_intermediates/src/com/book/support/R.java
+LOCAL_MODULE:= bookSupport
+include $(BUILD_STATIC_JAVA_LIBRARY)
+
+# Build sub-modules
+include $(call all-makefiles-under, $(LOCAL_PATH))
